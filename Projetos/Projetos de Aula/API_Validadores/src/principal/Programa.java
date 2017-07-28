@@ -1,5 +1,9 @@
 package principal;
 
+import negocio.BuscaCEP;
+
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
 
 import br.com.caelum.stella.validation.CPFValidator;
@@ -7,7 +11,7 @@ import br.com.caelum.stella.validation.InvalidStateException;
 
 public class Programa {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 
 		
@@ -23,6 +27,15 @@ public class Programa {
 			System.out.println("Erro: " + e.getInvalidMessages() + " não foi possivel validar este CPF!");
 		}
 		
+		BuscaCEP buscaCep = new BuscaCEP();
+		
+		String cep = JOptionPane.showInputDialog("Digite um cep para fazer a validação: ");
+		
+		System.out.println("Estado: " + buscaCep.getUF(cep) + "\n" +
+						   "Cidade: " + buscaCep.getCidade(cep) + "\n" +
+						   "Bairro: " + buscaCep.getBairro(cep) + "\n" +
+						   "Rua: "    + buscaCep.getEndereco(cep));
+
 	}
 
 }
